@@ -3,4 +3,4 @@ list1 = [1, 1, 1, 2,5,6,7,5,7,9,5,2,6,9,4]
 new_list = []
 for i in range(10):
     new_list.append(list1.count(i))
-print(new_list, '1')
+print(new_list)
