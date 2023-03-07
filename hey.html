@@ -4,9 +4,36 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="email">
-    <ol>
-        
-    </ol>
+    <h3 id="login">Log In</h3>
+    <div>
+        <form action="" method="post">
+            <div>
+                <label for="username">Username</label>
+                <input type="text" placeholder="enter your username">
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" placeholder="enter your email">
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" placeholder="enter your password">
+            </div>
+            <div>
+                <label for="day">Select the current day</label>
+                <select name="day" id="day">
+                    <option value="Sunday">Sunday</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thirsday">Thirsday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                </select>
+            </div>
+            <button id="login_button">Log In</button>
+        </form>
+    </div>
+    <script src="hey.js"></script>
 </body>
 </html>
