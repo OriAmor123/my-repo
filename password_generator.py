@@ -40,4 +40,4 @@ while True:
     else:
         password = randomize()
 
-print(password)
+print(f'your password is {password}')
