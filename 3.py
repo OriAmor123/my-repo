@@ -1,2 +1,2 @@
-from hey import sqr
-print(sqr(100))
+import hey
+print(hey.sqr(100))
