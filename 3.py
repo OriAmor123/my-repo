@@ -1,5 +1,5 @@
-import hey
-print(hey.sqr(100))
+import main
+print(main.sqr(4))
 Yahel = {
     'definition': 'undefined'
 

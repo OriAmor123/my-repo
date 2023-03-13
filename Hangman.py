@@ -7,7 +7,7 @@ HANGMAN_ASCII_ART = (' _    _\
       \n |_|  |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|  \
       \n                      __/ |     \
       \n                     |___/')
-WORD_FILE = open('C:\\Users\\OriAmor\\Desktop\\Python\\hangman\\words.txt')
+WORD_FILE = open('C:\\Users\\OriAmor\\Desktop\\Python\\hangman_words.txt')
 WORDS = WORD_FILE.read()
 WORD_LIST = WORDS.split()
 NUMBER_OF_TRYS = 6

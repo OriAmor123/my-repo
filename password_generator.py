@@ -17,27 +17,31 @@ def randomize():
         password+=note
     return password
 
-password = randomize()
 
-#checks if the password contains small letters and numbers
-while True:
-    #checks if the password contains small letters
-    for letter in SMALL_LETTERS:
-        letter_check=0
-        if letter in password:
-            letter_check+=1
-            break
-    #checks if the password contains numbers
-    for number in NUMBERS:
-        number_check=0
-        if number in password:
-            number_check+=1
-            break
-    #checks if the password is according to the requirements,
-    #else regenerates new password and checks it again
-    if number_check>0 and letter_check >0:
-        break
-    else:
-        password = randomize()
 
-print(f'your password is {password}')
+def main():
+    #checks if the password contains small letters and numbers
+    password = randomize()
+    while True:
+        #checks if the password contains small letters
+        for letter in SMALL_LETTERS:
+            letter_check=0
+            if letter in password:
+                letter_check+=1
+                break
+        #checks if the password contains numbers
+        for number in NUMBERS:
+            number_check=0
+            if number in password:
+                number_check+=1
+                break
+        #checks if the password is according to the requirements,
+        #else regenerates new password and checks it again
+        if number_check>0 and letter_check >0:
+            break
+        else:
+            password = randomize()
+    print(f'your password is {password}')
+
+if __name__ == '__main__':
+    main()
