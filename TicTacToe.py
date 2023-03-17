@@ -25,8 +25,6 @@ def check_who_win(board):
         elif board[0][i]==board[1][i]==board[2][i] !=' ':
             winner = board[0][i]
             return winner
-        else:
-            return None
     if board[0][0]==board[1][1]==board[2][2] !=' ':
         winner = board[0][0]
         return winner

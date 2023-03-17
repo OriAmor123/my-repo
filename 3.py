@@ -1,8 +1,5 @@
-import main
-print(main.sqr(4))
-Yahel = {
-    'definition': 'undefined'
-
+objec = {
+    'name': 'hello',
+    'discription': 'this is discript'
 }
-Yahel['dESCRIPTION'] = 'HEY'
-print(Yahel.items())
+print(objec['name'])
