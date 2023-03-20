@@ -129,7 +129,7 @@ def spin_machine(balance):
 def main():
     running = True
     balance = deposit()
-    while running:
+    while running and balance >0:
         print(f'Your balance is {balance}')
         play = input('Press enter to play (q to quit) ').lower()
         if play == 'q':
@@ -137,6 +137,7 @@ def main():
             continue
         elif play == '':
             balance = spin_machine(balance)
+    print('Game Over!\nThanks For Playing')
 
 
 if __name__ == '__main__':
