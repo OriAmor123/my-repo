@@ -57,11 +57,11 @@ def check_spot_if_was_already(spot, recent_spots):
 def assign_symbol(board, symbol, spot, recent_spots):
     spot= int(spot)
     recent_spots.remove(spot)
-    if spot == 1:
+    if spot == 7:
         board[0][0] = symbol
-    elif spot == 2:
+    elif spot == 8:
         board[0][1] = symbol
-    elif spot == 3:
+    elif spot == 9:
         board[0][2] = symbol
     elif spot == 4:
         board[1][0] = symbol
@@ -69,11 +69,11 @@ def assign_symbol(board, symbol, spot, recent_spots):
         board[1][1] = symbol
     elif spot == 6:
         board[1][2] = symbol
-    elif spot == 7:
+    elif spot == 1:
         board[2][0] = symbol
-    elif spot == 8:
+    elif spot == 2:
         board[2][1] = symbol
-    elif spot == 9:
+    elif spot == 3:
         board[2][2] = symbol
 
 def main():

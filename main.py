@@ -5,9 +5,11 @@ import password_generator
 import Hangman
 import party_access
 import TicTacToe
+import betting_slot_machine
 
 def main():
-    print('1 - "sqrt of complex number"\n2 - "rock paper scissors"\n3 - "quadratic formula"\n4 - "password generator"\n5 - "hangman"\n6 - "party access"\n7 - "TicTacToe"')
+    print('1 - "sqrt of complex number"\n2 - "rock paper scissors"\n3 - "quadratic formula"\n4 - "password generator"    \
+          \n5 - "hangman"\n6 - "party access"\n7 - "TicTacToe"\n8 - "betting slot machine"')
     while True:
         choose = input('Please enter a number for access into the folowing programs: ')
         if choose == '1':
@@ -30,6 +32,10 @@ def main():
             break
         elif choose == '7':
             TicTacToe.main()
+            break
+        elif choose == '8':
+            betting_slot_machine.main()
+            break
         else:
             print('your input is invalid')
 
