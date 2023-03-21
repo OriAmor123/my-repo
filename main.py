@@ -1,11 +1,11 @@
-import sqrt_of_complex_number
-import Rock_Paper_Scissors
-import quadratic_formula
-import password_generator
-import Hangman
-import party_access
-import TicTacToe
-import betting_slot_machine
+import mini_games.sqrt_of_complex_number as sqrt_of_complex_number
+import games.Rock_Paper_Scissors as Rock_Paper_Scissors
+import mini_games.quadratic_formula as quadratic_formula
+import games.password_generator as password_generator
+import games.Hangman as Hangman
+import mini_games.party_access as party_access
+import games.TicTacToe as TicTacToe
+import games.betting_slot_machine as betting_slot_machine
 
 def main():
     print('1 - "sqrt of complex number"\n2 - "rock paper scissors"\n3 - "quadratic formula"\n4 - "password generator"    \
