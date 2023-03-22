@@ -130,7 +130,7 @@ def main():
     running = True
     balance = deposit()
     while running and balance >0:
-        print(f'Your balance is {balance}')
+        print(f'Your balance is ${balance}')
         play = input('Press enter to play (q to quit) ').lower()
         if play == 'q':
             running = False

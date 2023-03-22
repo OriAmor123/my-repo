@@ -1,6 +1,6 @@
 import random
 
-secret_num= random.randint(1,10)
+secret_num= random.randint(1,11)
 trys_available=5
 current_try=0
 

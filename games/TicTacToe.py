@@ -1,5 +1,5 @@
 BOARD = [[' ',' ',' '],[' ',' ',' '],[' ',' ',' ']]
-PLAYERS_SYMBOL = ['Y','O'] #player 1 is X, player 2 is Y
+PLAYERS_SYMBOL = ['X','Y'] #player 1 is X, player 2 is Y
 PREVIOUS_SPOTS = []
 available_spots = [1,2,3,4,5,6,7,8,9]
 
