@@ -5,15 +5,15 @@ NAMES = list({'שחור', 'קשת', 'רחבה', 'זווית', 'ניילון', '�
     'מסע', 'חרב', 'תיקון', 'דת', 'הר געש', 'קבר', 'שמן', 'צמר', 'חצי',  'גדר', 'צל', 'קצב',
 })
 NUM_OF_COLORS = {
-    'red':8,
-    'blue':8,
+    'red  ':8,
+    'blue ':8,
     'black':1,
     'green':7
 }
 names_for_a_game = random.sample(NAMES, 25)
 LEN_OF_WORDS = 6
 # *Decide whether red or blue starts
-PLAYERS = ['red', 'blue']
+PLAYERS = ['red  ', 'blue ']
 starter = random.choice(PLAYERS)
 
 # *Aligning the words to the same length
@@ -34,9 +34,24 @@ def print_agents_board(colors, starter):
     for color, times_appear in colors.items():
         for _ in range(times_appear):
             list_of_colors.append(color)
+
+    # *Creating 2D table of the board in a list
     board = [[],[],[],[],[]]
-    # TODO: 1. adding the colors in the board list
-    # TODO: 2. creating the board
+    for row in range(5):
+        for _ in range(5):
+            color = random.choice(list_of_colors)
+            board[row].append(color)
+            list_of_colors.remove(color)
+    # *Printing the actual board
+    for row in range(5):
+        for column in range(5):
+            print(board[row][column], end='')
+            if column < 4:
+                print(' | ', end='')
+        print()
+        if row <4:
+            print('--------------------------------------')
+
 
 
 def print_players_board(names):
@@ -61,14 +76,16 @@ def print_players_board(names):
                 print(' | ', end='')
             #moving to the next line
         print()
-        print('-------------------------------------------')
+        if i <4:
+            print('-------------------------------------------')
 
 
 def main():
-    # names = aligning_words(names_for_a_game)
-    # print_players_board(names)
-    # print(names_for_a_game)
     print_agents_board(NUM_OF_COLORS, starter)
+    print()
+    names = aligning_words(names_for_a_game)
+    print_players_board(names)
+# TODO: Making the ligic of the game, rounds, agents definition, one turn back memory, choosing words and marking them, winning/losing
 
 
 if __name__ == '__main__':
