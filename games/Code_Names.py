@@ -14,7 +14,19 @@ names_for_a_game = random.sample(NAMES, 25)
 LEN_OF_WORDS = 6
 # *Decide whether red or blue starts
 PLAYERS = ['red  ', 'blue ']
+
 starter = random.choice(PLAYERS)
+
+
+round = 1
+recent_starter_guess = 0
+recent_second_guess = 0
+
+# * Second_player
+def second(first):
+    PLAYERS.remove(first)
+    return PLAYERS[0]
+second_player = second(starter)
 
 # *Aligning the words to the same length
 def aligning_words(list_of_words):
@@ -51,20 +63,22 @@ def print_agents_board(colors, starter):
         print()
         if row <4:
             print('--------------------------------------')
+    return board
 
-
-
-def print_players_board(names):
-    names = names.copy()
+def create_2d_board(word_list):
+    word_list = word_list.copy()
     board = [[],[],[],[],[]]
     # *Creating a list with 5 rows with 5 words each
     #appending a row 5 times
     for i in range(5):
         #creating the row
         for _ in range(5):
-            word = random.choice(names)
+            word = random.choice(word_list)
             board[i].append(word[::-1])
-            names.remove(word)
+            word_list.remove(word)
+    return board
+
+def print_players_board(board):
     # * Creating the actual board
     #printing each row seperately
     for i in range(5):
@@ -79,12 +93,61 @@ def print_players_board(names):
         if i <4:
             print('-------------------------------------------')
 
+def starter_round(starter, word_list, color_table, board_table):
+    starter_agents_definition = input(f'{starter} agents turn. Write a definition and a number of geusses: ')
+    global recent_starter_guess
+    current_definition = starter_agents_definition.split()[0]
+    num_of_guesses = int(starter_agents_definition.split()[1])
+
+    while num_of_guesses > 0:
+        # TODO: guessing words and one step back memory
+        #checking if the word is in the board
+        while True:
+            current_guess = input(f'{starter} Players, write a guess: ')
+            if current_guess in word_list:
+                break
+            else:
+                print('The word isn\'t on the board, try again.')
+        #getting the word's position & color
+        for row in board_table:
+            for word_in_row in row:
+                if current_guess == word_in_row[::-1]:
+                    current_guess_position = [board_table.index(row), row.index(word_in_row)]
+                    break # TODO: The code doesn't find the current guess in the board list
+            else:
+                break
+        current_guess_row, current_guess_col = current_guess_position
+        current_guess_color = color_table[current_guess_row][current_guess_col]
+
+        #* determing whether the guess is red, green. blue, or black
+        #if it is the correct one
+        if current_guess_color == starter:
+            board_table[current_guess_row][current_guess_col] = starter + ' '
+            print(f'Correct! You have {num_of_guesses-1} guesses left.')
+        # elif current_guess_color == second_player:
+
+        
+
+
+def second_player_round(second):
+    pass
 
 def main():
-    print_agents_board(NUM_OF_COLORS, starter)
+    color_table = print_agents_board(NUM_OF_COLORS, starter)
     print()
-    names = aligning_words(names_for_a_game)
-    print_players_board(names)
+    board_table = create_2d_board(names_for_a_game) #a table for the visual board
+    aligned_board_table = create_2d_board(aligning_words(names_for_a_game)) #the list of the aligned words
+    print_players_board(aligned_board_table)
+    # TODO: The word list and the board ard NOT THE SAME
+
+    # *Rounds
+    global round
+    while round:
+        if round %2 !=0:
+            starter_round(starter, names_for_a_game, color_table, board_table)
+        else:
+            second_player_round(second_player)
+        round+=1
 # TODO: Making the ligic of the game, rounds, agents definition, one turn back memory, choosing words and marking them, winning/losing
 
 
