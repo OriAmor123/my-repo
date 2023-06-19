@@ -21,6 +21,10 @@ starter = random.choice(PLAYERS)
 round = 1
 recent_starter_guess = 0
 recent_second_guess = 0
+recent_starter_definition = None
+recent_second_definition = None
+starter_correct_guesses = 0
+second_correct_guesses = 0
 
 # * Second_player
 def second(first):
@@ -38,7 +42,6 @@ def aligning_words(list_of_words):
             list_of_words[list_of_words.index(word)] = aligned_word
     return list_of_words
     
-
 def print_agents_board(colors, starter):
     # *Creating a list with the colors
     colors[starter] = 9
@@ -73,9 +76,8 @@ def create_2d_board(word_list):
     for i in range(5):
         #creating the row
         for _ in range(5):
-            word = random.choice(word_list)
+            word = word_list.pop()
             board[i].append(word[::-1])
-            word_list.remove(word)
     return board
 
 def print_players_board(board):
@@ -93,17 +95,21 @@ def print_players_board(board):
         if i <4:
             print('-------------------------------------------')
 
-def starter_round(starter, word_list, color_table, board_table):
-    starter_agents_definition = input(f'{starter} agents turn. Write a definition and a number of geusses: ')
+def starter_round(starter, word_list, color_table, board_table, aligned_board_table):
     global recent_starter_guess
-    current_definition = starter_agents_definition.split()[0]
+    global recent_starter_definition
+    global starter_correct_guesses
+    #* If there was a recent definition available, the colsole will print the definition
+    if recent_starter_definition != None:
+        print(f'Your recent definition was \"{recent_starter_definition}\", you have an additional 1 guess in this round.')
+    starter_agents_definition = input(f'{starter} agents turn. Write a definition and a number of geusses: ')
     num_of_guesses = int(starter_agents_definition.split()[1])
 
-    while num_of_guesses > 0:
+    while num_of_guesses + recent_starter_guess > 0:
         # TODO: guessing words and one step back memory
         #checking if the word is in the board
         while True:
-            current_guess = input(f'{starter} Players, write a guess: ')
+            current_guess = input(f'{starter} Players, you have {num_of_guesses + recent_starter_guess} guesses, write a guess: ')
             if current_guess in word_list:
                 break
             else:
@@ -113,18 +119,45 @@ def starter_round(starter, word_list, color_table, board_table):
             for word_in_row in row:
                 if current_guess == word_in_row[::-1]:
                     current_guess_position = [board_table.index(row), row.index(word_in_row)]
-                    break # TODO: The code doesn't find the current guess in the board list
-            else:
-                break
+                    break
+
         current_guess_row, current_guess_col = current_guess_position
         current_guess_color = color_table[current_guess_row][current_guess_col]
-
+        
         #* determing whether the guess is red, green. blue, or black
         #if it is the correct one
         if current_guess_color == starter:
-            board_table[current_guess_row][current_guess_col] = starter + ' '
+            aligned_board_table[current_guess_row][current_guess_col] = starter + ' '
             print(f'Correct! You have {num_of_guesses-1} guesses left.')
-        # elif current_guess_color == second_player:
+            print_players_board(aligned_board_table)
+            
+            starter_correct_guesses += 1
+            recent_starter_guess = 0
+            recent_starter_definition = None
+            #* If the starter player won
+            if starter_correct_guesses == 9:
+                return 'won'
+
+        elif current_guess_color == second_player:
+            aligned_board_table[current_guess_row][current_guess_col] = second_player + ' '
+            print(f'Wrong! A {second_player} word!')
+            print_players_board(aligned_board_table)
+
+            recent_starter_guess = 1
+            recent_starter_definition = starter_agents_definition.split()[0]
+            break
+
+        elif current_guess_color == 'green':
+            aligned_board_table[current_guess_row][current_guess_col] = 'green '
+            print('Wrong! A green word!')
+            print_players_board(aligned_board_table)
+
+            recent_starter_guess = 1
+            recent_starter_definition = starter_agents_definition.split()[0]
+            break
+        elif current_guess_color == 'black':
+            print('You\'ve hit the asassin! You lost!')
+            return 'lost'
 
         
 
@@ -138,16 +171,25 @@ def main():
     board_table = create_2d_board(names_for_a_game) #a table for the visual board
     aligned_board_table = create_2d_board(aligning_words(names_for_a_game)) #the list of the aligned words
     print_players_board(aligned_board_table)
-    # TODO: The word list and the board ard NOT THE SAME
+    winner = None
 
     # *Rounds
     global round
     while round:
         if round %2 !=0:
-            starter_round(starter, names_for_a_game, color_table, board_table)
+            round_result = starter_round(starter, names_for_a_game, color_table, board_table, aligned_board_table)
+            if round_result == 'won':
+                print(f'Congatulations! {starter} team won!')
+                break
+            elif round_result == 'lost':
+                print(f'{second_player} won!')
+                break
+                
         else:
             second_player_round(second_player)
         round+=1
+    
+    print('Game Over!\nThanks For Playing!')
 # TODO: Making the ligic of the game, rounds, agents definition, one turn back memory, choosing words and marking them, winning/losing
 
 
