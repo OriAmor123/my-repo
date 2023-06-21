@@ -104,10 +104,10 @@ def starter_round(starter, word_list, color_table, board_table, aligned_board_ta
     if recent_starter_definition != None:
         print(f'Your recent definition was \"{recent_starter_definition}\", you have an additional 1 guess in this round.')
     starter_agents_definition = input(f'{starter} agents turn. Write a definition and a number of geusses: ')
+    # TODO: definition validation detector
     num_of_guesses = int(starter_agents_definition.split()[1])
 
     while num_of_guesses + recent_starter_guess > 0:
-        # TODO: guessing words and one step back memory
         #checking if the word is in the board
         while True:
             current_guess = input(f'{starter} Players, you have {num_of_guesses + recent_starter_guess} guesses, write a guess: ')
@@ -133,6 +133,7 @@ def starter_round(starter, word_list, color_table, board_table, aligned_board_ta
             print_players_board(aligned_board_table)
             
             starter_correct_guesses += 1
+            num_of_guesses -= 1
             recent_starter_guess = 0
             recent_starter_definition = None
             #* If the starter player won
@@ -173,6 +174,7 @@ def second_player_round(second, word_list, color_table, board_table, aligned_boa
     if recent_second_definition != None:
         print(f'Your recent definition was \"{recent_second_definition}\", you have an additional 1 guess in this round.')
     second_agents_definition = input(f'{second} agents turn. Write a definition and a number of geusses: ')
+    # TODO: definition validation detector
     num_of_guesses = int(second_agents_definition.split()[1])
 
     while num_of_guesses + recent_second_guess > 0:
@@ -201,6 +203,7 @@ def second_player_round(second, word_list, color_table, board_table, aligned_boa
             print_players_board(aligned_board_table)
             
             second_correct_guesses += 1
+            num_of_guesses -= 1
             recent_second_guess = 0
             recent_second_definition = None
             #* If the starter player won
@@ -267,7 +270,6 @@ def main():
         round+=1
     
     print(f'Game Over!\nThanks For Playing!\n Team {winner} is the winner of the game')
-# TODO: Making the ligic of the game, rounds, agents definition, one turn back memory, choosing words and marking them, winning/losing
 
 
 if __name__ == '__main__':
